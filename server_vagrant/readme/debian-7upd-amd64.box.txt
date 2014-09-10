@@ -1,0 +1,8 @@
+Name: debian-7upd-amd64
+Description: 
+ - Debian 7 server, 64 bit.
+ - Build for virtualbox, guest extensions installed.
+ - Updates installed.
+ - Built for vagrant
+ - Locales: US (Language,Timezone,Mirror)
+
