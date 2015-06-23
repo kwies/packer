@@ -23,16 +23,16 @@ Tested under
 ## Available templates
 
 * server_vagrant (Vagrant base boxes for server)
-** CentOS 6 (32bit, 64bit)
-** Debian 7 (32bit, 64bit)
-** Ubuntu 14.04 (32bit, 64bit)
+  * CentOS 6 (32bit, 64bit)
+  * Debian 7 (32bit, 64bit)
+  * Ubuntu 14.04 (32bit, 64bit)
 * desktop 
-** base (OVA Export)
-*** Lubuntu 14.04 (32bit, 64bit)
-*** Xubuntu 14.04 (32bit, 64bit)
-** vagrant (vagrant base boxes)
-*** Lubuntu 14.04 (32bit, 64bit)
-*** Xubuntu 14.04 (32bit, 64bit)
+  * base (OVA Export)
+    * Lubuntu 14.04 (32bit, 64bit)
+    * Xubuntu 14.04 (32bit, 64bit)
+  * vagrant (vagrant base boxes)
+    * Lubuntu 14.04 (32bit, 64bit)
+    * Xubuntu 14.04 (32bit, 64bit)
 
 ## Run instructions
 
