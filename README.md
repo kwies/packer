@@ -7,7 +7,7 @@ cite from packer.io:
 
 ## What is this repo for?
 
-Providing templates/scripts (for vagrant base boxes) for well known linux distributions.
+Providing templates/scripts (for vagrant base boxes) for some linux distributions.
 
 ## Requirements
 * [packer] (https://packer.io/)
@@ -18,7 +18,7 @@ Tested under
 * Linux (Debian 7 / Ubuntu 14.04)
 * packer 0.7.5
 * virtualbox 4.3.18
-* vagrantup 1.7.5
+* vagrant 1.7.5
 
 ## Available templates
 
