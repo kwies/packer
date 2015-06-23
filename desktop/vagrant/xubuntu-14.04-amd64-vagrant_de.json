@@ -1,0 +1,65 @@
+{
+  "builders": [{
+    "type": "virtualbox-iso",
+    "virtualbox_version_file": ".vbox_version",
+    "headless": false,
+
+    "guest_os_type": "Ubuntu_64",
+    "disk_size": 40960,
+
+    "iso_url": "http://cdimage.ubuntu.com/lubuntu/releases/14.04/release/lubuntu-14.04.1-alternate-amd64.iso",
+    "iso_checksum": "a5f97cd6a9f171c70cf816de8728f13b",
+    "iso_checksum_type": "md5",
+
+    "boot_command": [
+      "<esc><esc><enter><wait>",
+      "/install/vmlinuz preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu/14.04/xubuntu_vagrant_de/preseed.cfg <wait>",
+      "debian-installer=en_US auto locale=en_US kbd-chooser/method=de ",
+      "hostname={{ .Name }} ",
+      "fb=false debconf/frontend=noninteractive ",
+      "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=Germany keyboard-configuration/variant=Germany console-setup/ask_detect=false ",
+      "initrd=/install/initrd.gz -- <enter>"
+    ],
+    "boot_wait": "12s",
+
+    "http_directory": "http",
+    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_port": 22,
+    "ssh_wait_timeout": "10000s",
+
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "1024"],
+      ["modifyvm", "{{.Name}}", "--cpus", "1"]
+    ],
+
+    "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
+
+    "format": "ova",
+    "vm_name": "xubuntu1404-64",
+    "output_directory": "build/xubuntu-14.04-amd64-vagrant_de/"
+  }],
+  "post-processors": [{
+    "output": "build/xubuntu-14.04-amd64-vagrant_de/xubuntu-14.04-amd64-vagrant_de.box",
+    "type": "vagrant",
+    "keep_input_artifact": true
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+    "environment_vars": [
+      "PACKERINSTALLUSERNAME=vagrant"
+    ],
+    "scripts": [
+      "../scripts/ubuntu/14.04/base.sh",
+      "../scripts/ubuntu/14.04/install_xubuntu.sh",
+      "../scripts/ubuntu/14.04/vagrant.sh",
+      "../scripts/ubuntu/14.04/vboxguest.sh",
+      "../scripts/ubuntu/14.04/misc.sh",
+      "../scripts/ubuntu/14.04/misc_xubuntu.sh",
+      "../scripts/ubuntu/14.04/cleanup.sh"
+    ]
+  }]
+}

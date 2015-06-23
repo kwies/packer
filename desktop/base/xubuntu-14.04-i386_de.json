@@ -1,0 +1,65 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu/14.04/xubuntu_de/preseed.cfg <wait>",
+        "hostname={{ .Name }} <wait>",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=de <wait>",
+        "fb=false debconf/frontend=noninteractive <wait>",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=Germany keyboard-configuration/variant=Germany console-setup/ask_detect=false <wait>",
+        "initrd=/install/initrd.gz -- <enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 40960,
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_os_type": "Ubuntu",
+      "http_directory": "http",
+      "iso_checksum": "a7c153f1101fb8a181ccda01a448ffd1",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://cdimage.ubuntu.com/lubuntu/releases/14.04/release/lubuntu-14.04.1-alternate-i386.iso",
+      "shutdown_command": "echo '123456'| sudo -S shutdown -P now",
+      "ssh_password": "123456",
+      "ssh_port": 22,
+      "ssh_username": "ubuntu",
+      "ssh_wait_timeout": "10000s",
+      "type": "virtualbox-iso",
+      "format": "ova",
+      "headless": false,
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "1"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "xubuntu1404-32",
+      "output_directory": "build/xubuntu-14.04-i386_de/"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo '123456' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "environment_vars": [
+        "PACKERINSTALLUSERNAME=ubuntu"
+      ],
+      "scripts": [
+        "../scripts/ubuntu/14.04/base.sh",
+        "../scripts/ubuntu/14.04/install_xubuntu.sh",
+        "../scripts/ubuntu/14.04/vboxguest.sh",
+        "../scripts/ubuntu/14.04/misc.sh",
+        "../scripts/ubuntu/14.04/misc_xubuntu.sh",
+        "../scripts/ubuntu/14.04/cleanup.sh"
+      ],
+      "type": "shell"
+    }
+  ]
+}

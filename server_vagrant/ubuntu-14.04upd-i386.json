@@ -7,8 +7,8 @@
     "guest_os_type": "Ubuntu",
     "disk_size": 40960,
 
-    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.1-server-i386.iso",
-    "iso_checksum": "22c6764a4b9335d7b384a081e0fed104236c99d9",
+    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.2-server-i386.iso",
+    "iso_checksum": "80b1a915f42cc298855bd4e298f5bfbeb61d800e",
     "iso_checksum_type": "sha1",
 
     "boot_command": [

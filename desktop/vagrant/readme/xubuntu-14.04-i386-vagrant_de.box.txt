@@ -1,0 +1,8 @@
+Name: xubuntu-14.04-i386-vagrant
+Description: 
+ - Ubuntu 14.04 Xfce desktop ("Xubuntu"), 32 bit.
+ - Build for virtualbox, guest extensions installed.
+ - Updates installed.
+ - Built for vagrant
+ - Locales: AT/German (Language,Timezone,Mirror)
+

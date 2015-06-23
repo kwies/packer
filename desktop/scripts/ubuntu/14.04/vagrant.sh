@@ -1,7 +1,6 @@
 
 # Set up sudo
-#sudo sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
-#echo "vagrant        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+echo "vagrant        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 # install insecure key
 mkdir /home/vagrant/.ssh

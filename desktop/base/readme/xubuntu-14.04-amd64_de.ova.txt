@@ -1,0 +1,8 @@
+Name: xubuntu-14.04-amd64
+Description: 
+ - Ubuntu 14.04 Xfce desktop ("Xubuntu"), 64 bit.
+ - Build for virtualbox, guest extensions installed.
+ - Updates installed.
+ - Locales: AT/German (Language,Timezone,Mirror)
+Notes:
+ - user: ubuntu, password: 123456
