@@ -40,5 +40,5 @@ Tested under
 ## Run instructions
 
 * install requirements
-* switch to the respective folder (server_vagrant, desktop/base, desktop/vagrant)
+* switch to a subfolder (server_base, desktop/base, desktop/vagrant, advanced)
 * run 'packer build JSONFILENAME.json'
