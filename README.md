@@ -39,4 +39,4 @@ Tested under
 
 * install requirements
 * switch to the respective folder (server_vagrant, desktop/base, desktop/vagrant)
-* run 'packer build <JSONFILENAME>.json'
+* run 'packer build JSONFILENAME.json'
