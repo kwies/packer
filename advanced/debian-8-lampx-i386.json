@@ -1,0 +1,88 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><wait>",
+        "install",
+        " auto",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian-8-lampx/preseed.cfg",
+        " debian-installer=en_US",
+        " locale=en_US.UTF-8",
+        " kbd-chooser/method=us",
+        " keymap=us",
+        " netcfg/get_hostname={{ .Name }}",
+        " netcfg/get_domain=vm",
+        " fb=false",
+        " debconf/frontend=noninteractive",
+        " console-setup/ask_detect=false",
+        " console-keymaps-at/keymap=us",
+        " keyboard-configuration/xkb-keymap=us",
+        "<enter>"
+      ],
+      "disk_size": 40000,
+      "guest_os_type": "Debian",
+      "headless": false,
+      "http_directory": "http",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "iso_checksum": "095a83b715e1b74b6d30b2259275f4af",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://cdimage.debian.org/debian-cd/8.1.0/i386/iso-cd//debian-8.1.0-i386-netinst.iso",
+      "shutdown_command": "echo 'halt -p' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "1"
+        ]
+      ],
+      "format": "ova",
+      "output_directory": "build/debian-8-lampx-i386/",
+      "vm_name": "debian8-32"
+    }
+  ],
+  "post-processors": [{
+    "output": "build/debian-8-lampx-i386/debian-8-lampx-i386.box",
+    "type": "vagrant",
+    "keep_input_artifact": true
+  }],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/debian-8-lampx",
+      "destination": "/tmp"
+    },
+    {
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "type": "shell",
+      "inline": ["mv /tmp/debian-8-lampx /home/vagrant/files/"]
+    },
+    {
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/debian-8-lampx/base.sh",
+            "scripts/debian-8-lampx/vagrant.sh",
+            "scripts/debian-8-lampx/vboxguest.sh",
+            "scripts/debian-8-lampx/lampx_base.sh",
+            "scripts/debian-8-lampx/cleanup.sh"
+          ]
+        }
+      },
+      "type": "shell"
+    }
+  ]
+}

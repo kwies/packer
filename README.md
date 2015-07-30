@@ -16,8 +16,8 @@ Providing templates/scripts (for vagrant base boxes) for some linux distribution
 
 Tested under
 * Linux (Debian 7 / Ubuntu 14.04)
-* packer 0.7.5
-* virtualbox 4.3.18
+* packer 0.8.2
+* virtualbox 4.3.28
 * vagrant 1.7.5
 
 ## Available templates
@@ -34,6 +34,8 @@ Tested under
   * vagrant (vagrant base boxes)
     * Lubuntu 14.04 (32bit, 64bit)
     * Xubuntu 14.04 (32bit, 64bit)
+* advanced
+  * LampX stack based on Debian 8 (32bit, 64bit)
 
 ## Run instructions
 
