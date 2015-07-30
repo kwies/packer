@@ -22,9 +22,10 @@ Tested under
 
 ## Available templates
 
-* server_vagrant (Vagrant base boxes for server)
+* server_base (Vagrant base boxes for server)
   * CentOS 6 (32bit, 64bit)
   * Debian 7 (32bit, 64bit)
+  * Debian 8 (32bit, 64bit)
   * Ubuntu 14.04 (32bit, 64bit)
 * desktop 
   * base (OVA Export)

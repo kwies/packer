@@ -1,0 +1,77 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><wait>",
+        "install",
+        " auto",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian/8/preseed.cfg",
+        " debian-installer=en_US",
+        " locale=en_US.UTF-8",
+        " kbd-chooser/method=us",
+        " keymap=us",
+        " netcfg/get_hostname={{ .Name }}",
+        " netcfg/get_domain=vm",
+        " fb=false",
+        " debconf/frontend=noninteractive",
+        " console-setup/ask_detect=false",
+        " console-keymaps-at/keymap=us",
+        " keyboard-configuration/xkb-keymap=us",
+        "<enter>"
+      ],
+      "disk_size": 40000,
+      "guest_os_type": "Debian_64",
+      "headless": false,
+      "http_directory": "http",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "iso_checksum": "d9209f355449fe13db3963571b1f52d4",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://cdimage.debian.org/cdimage/release/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso",
+      "shutdown_command": "echo 'halt -p' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "1"
+        ]
+      ],
+      "format": "ova",
+      "output_directory": "build/debian-8upd-amd64/",
+      "vm_name": "debian8-64"
+    }
+  ],
+  "post-processors": [{
+    "output": "build/debian-8upd-amd64/debian-8upd-amd64.box",
+    "type": "vagrant",
+    "keep_input_artifact": true
+  }],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/debian/8/base.sh",
+            "scripts/debian/8/vagrant.sh",
+            "scripts/debian/8/vboxguest.sh",
+            "scripts/debian/8/cleanup.sh"
+          ]
+        }
+      },
+      "type": "shell"
+    }
+  ]
+}
